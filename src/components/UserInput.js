@@ -3,7 +3,13 @@ import React, { useState } from 'react';
 import './UserInput.css';
 
 const UserInput = () => {
-  useState();
+  const [userInput, yearlyContribution, expectedReturn, duration] = useState({
+    currentSavings: 10000,
+    yearlyContribution: 1200,
+    expectedReturn: 7,
+    duration: 10
+ });
+
   const submitHandler = event => {
     event.preventDefault();
     const financialData = {
