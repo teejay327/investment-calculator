@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import './UserInput.css';
 
 const UserInput = () => {
+  useState();
   const submitHandler = event => {
     event.preventDefault();
     const financialData = {
