@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './UserInput.css';
 
 const UserInput = () => {
-  const [userInput, yearlyContribution, expectedReturn, duration] = useState({
+  const [userInput, setUserInput] = useState({
     currentSavings: 10000,
     yearlyContribution: 1200,
     expectedReturn: 7,
@@ -23,7 +23,11 @@ const UserInput = () => {
   }
 
   const inputChangeHandler = (input, value) => {
-    console.log(input, value);
+    setUserInput((prevInput) => {
+      return {
+        ...prevInput, 
+      }
+    });
   }
 
   return (
