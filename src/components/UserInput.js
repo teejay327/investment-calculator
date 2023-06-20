@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 import './UserInput.css';
 
+const initialUserInput = {
+  currentSavings: 10000,
+  yearlyContribution: 1200,
+  expectedReturn: 7,
+  duration: 10
+}
+
 const UserInput = () => {
-  const [userInput, setUserInput] = useState({
-    currentSavings: 10000,
-    yearlyContribution: 1200,
-    expectedReturn: 7,
-    duration: 10
- });
+  const [userInput, setUserInput] = useState({ initialUserInput  });
 
   const submitHandler = event => {
     event.preventDefault();
@@ -19,13 +21,14 @@ const UserInput = () => {
   };
 
   const resetHandler = event => {
-    console.log('Reset');
+    setUserInput(initialUserInput);
   }
 
   const inputChangeHandler = (input, value) => {
     setUserInput((prevInput) => {
       return {
-        ...prevInput, 
+        ...prevInput,
+          [input]: value
       }
     });
   }
@@ -36,7 +39,9 @@ const UserInput = () => {
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
           <input onChange={(event) => inputChangeHandler('currentSavings', event.target.value)}
-           type="number" id="current-savings" />
+            value={ userInput['current-savings']}
+            type="number"
+            id="current-savings" />
         </p>
         <p>
           <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
@@ -50,12 +55,16 @@ const UserInput = () => {
             Expected Interest (%, per year)
           </label>
           <input onChange={(event) => inputChangeHandler('expected-return', event.target.value)} 
-          type="number" id="expected-return" />
+          value={ userInput['expected-return']}
+          type="number" 
+          id="expected-return" />
         </p>
         <p>
           <label htmlFor="duration">Investment Duration (years)</label>
           <input onChange={(event) => inputChangeHandler('duration', event.target.value)} 
-          type="number" id="duration" />
+          value={ userInput['duration']}
+          type="number" 
+          id="duration" />
         </p>
       </div>
       <p className="actions">
