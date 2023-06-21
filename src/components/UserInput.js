@@ -9,15 +9,12 @@ const initialUserInput = {
   duration: 10
 }
 
-const UserInput = () => {
+const UserInput = (props) => {
   const [userInput, setUserInput] = useState({ initialUserInput  });
 
   const submitHandler = event => {
     event.preventDefault();
-    const financialData = {
-      //currentSavings: current-savings
-    }
-    console.log('Submit')
+    props.onCalculate(userInput);
   };
 
   const resetHandler = event => {
