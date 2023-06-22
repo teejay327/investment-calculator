@@ -4,15 +4,19 @@ import UserInput from './components/UserInput';
 import Header from './components/Header';
 
 function App() {
-  const [results, setResults] = useState(null);
+  const [userInput, setUserInput] = useState(null);
   const calculateHandler = (userInput) => {
-    const yearlyData = [];
+    setUserInput(userInput)
+    }
+  
+  const yearlyData = [];
 
-    let currentSavings = +userInput['current-savings']; 
-    const yearlyContribution = +userInput['yearly-contribution']; 
-    const expectedReturn = +userInput['expected-return'] / 100;
-    const duration = +userInput['duration'];
-
+  if (userInput) {
+    let currentSavings = userInput['current-savings']; 
+    const yearlyContribution = userInput['yearly-contribution']; 
+    const expectedReturn = userInput['expected-return'] / 100;
+    const duration = userInput['duration'];
+  
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
       currentSavings += yearlyInterest + yearlyContribution;
@@ -23,21 +27,19 @@ function App() {
         yearlyContribution: yearlyContribution,
       });
     }
-    setResults(yearlyData);
-  };
+  }
 
   return (
     <div>
       <Header />
-
       <UserInput onCalculate={ calculateHandler }/>
 
-      {/* Todo: Show below table conditionally (only once result data is available) */}
-      {/* Show fallback text if no data is available */}
-      <ResultsTable />
+      {!userInput && <p>Investment not yet calculated</p>}
+      {userInput && <ResultsTable data={ yearlyData } 
+        initialInvestment={ userInput['current-savings'] }/> }
 
     </div>
   );
-}
+};
 
 export default App;
