@@ -5,7 +5,7 @@ const initialUserInput = {
   currentSavings: 10000,
   yearlyContribution: 1200,
   expectedReturn: 7,
-  duration: 9
+  duration: 10
 }
 
 const UserInput = (props) => {
