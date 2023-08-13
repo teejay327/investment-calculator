@@ -1,6 +1,6 @@
-import logo from './assets/investment-calculator-logo.png';
+import Header from './components/Header/Header';
 
-function App() {
+const App = () => {
   const calculateHandler = (userInput) => {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
@@ -30,11 +30,7 @@ function App() {
 
   return (
     <div>
-      <header className="header">
-        <img src={logo} alt="logo" />
-        <h1>Investment Calculator</h1>
-      </header>
-
+      <Header />
       <form className="form">
         <div className="input-group">
           <p>
