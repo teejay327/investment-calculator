@@ -1,32 +1,50 @@
+import { useState } from 'react';
+
+const initialUserInput = {
+  'current-savings': 10000,
+  'yearly-contribution': 1200,
+  'expected-return': 7,
+  'duration': 10
+};
+
 const UserInput = () => {  
+ const [userInput, setUserInput] = useState(initialUserInput);
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.log('submit');
   }
 
   const resetHandler = (event) => {
-    event.preventDefault();
-    console.log('reset');
+    setUserInput(initialUserInput);
   }
 
   const inputChangeHandler = (input, value) => {
-    console.log(input, value);
-  }
+    setUserInput((prevInput) => {
+      return {
+        ...prevInput,
+        [input]: value       // note the square brackets are used to dynamically store a value
+      };
+    });
+  };
 
   return (
-    <form onSubmit={submitHandler} className="form">
+    <form onSubmit={ submitHandler } className="form">
     <div className="input-group">
       <p>
         <label htmlFor="current-savings">Current Savings ($)</label>
         <input onChange={(event) => 
           inputChangeHandler('current-savings', event.target.value ) } 
+          value={ userInput['current-savings'] }    // set up 2-way binding
           type="number" id="current-savings" />
       </p>
       <p>
         <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
         <input onChange={(event) =>
           inputChangeHandler('yearly-contribution', event.target.value )
-        } type="number" id="yearly-contribution" />
+        } 
+        value={ userInput['yearly-contribution'] }    // set up 2-way binding
+        type="number" id="yearly-contribution" />
       </p>
     </div>
     <div className="input-group">
@@ -37,6 +55,7 @@ const UserInput = () => {
         <input onChange={(event) =>
           inputChangeHandler('expected-return', event.target.value)
         } 
+        value={ userInput['expected-return'] }    // set up 2-way bindi
         type="number" id="expected-return" />
       </p>
       <p>
@@ -44,6 +63,7 @@ const UserInput = () => {
         <input onChange={(event) => 
           inputChangeHandler('duration', event.target.value)
         }
+        value={ userInput['duration'] }    // set up 2-way binding
         type="number" id="duration" />
       </p>
     </div>
