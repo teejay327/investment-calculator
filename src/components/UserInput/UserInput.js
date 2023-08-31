@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const initialUserInput = {
-  'current-savings': 12000,
+  'current-savings': 10000,
   'yearly-contribution': 1000,
   'expected-return': 7,
   'duration': 10
